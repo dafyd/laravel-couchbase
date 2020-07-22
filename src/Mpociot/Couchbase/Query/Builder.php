@@ -252,7 +252,7 @@ class Builder extends BaseBuilder
         $this->type = $type;
 
         if (!is_null($type)) {
-            $this->where(Helper::TYPE_NAME, $type);
+            $this->where($this->connection->getDocTypeName(), $type);
         }
         return $this;
     }
@@ -493,12 +493,12 @@ class Builder extends BaseBuilder
 
         if ($batch) {
             foreach ($values as &$value) {
-                $value[Helper::TYPE_NAME] = $this->type;
+                $value[$this->connection->getDocTypeName()] = $this->type;
                 $key = Helper::getUniqueId($this->type);
                 $result = $this->connection->getCouchbaseBucket()->upsert($key, Grammar::removeMissingValue($value));
             }
         } else {
-            $values[Helper::TYPE_NAME] = $this->type;
+            $values[$this->connection->getDocTypeName()] = $this->type;
             $result = $this->connection->getCouchbaseBucket()->upsert($this->keys,
                 Grammar::removeMissingValue($values));
         }
@@ -857,7 +857,7 @@ class Builder extends BaseBuilder
     protected function detectValues($values)
     {
         foreach ($values as &$value) {
-            $value[Helper::TYPE_NAME] = $this->type;
+            $value[$this->connection->getDocTypeName()] = $this->type;
         }
         return [$values];
     }

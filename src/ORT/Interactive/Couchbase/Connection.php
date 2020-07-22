@@ -117,6 +117,17 @@ class Connection extends \Illuminate\Database\Connection
     {
         return $this->bucketname;
     }
+    
+    /**
+     * Get the Couchbase document type property name.
+     *
+     * @return string
+     */
+    public function getDocTypeName()
+    {
+        return $this->config['doctype'];
+    }
+
 
     /**
      * Begin a fluent query against a set of document types.

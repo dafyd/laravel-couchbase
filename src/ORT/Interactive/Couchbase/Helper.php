@@ -5,7 +5,7 @@ namespace ORT\Interactive\Couchbase;
 class Helper
 {
 
-    const TYPE_NAME = 'eloquent_type';
+    const TYPE_NAME = 'docType';
 
     public static function getUniqueId($prefix = null)
     {
